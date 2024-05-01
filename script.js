@@ -55,4 +55,5 @@ function clearAllItems() {
 
 itemForm.addEventListener("submit", addItem);
 itemList.addEventListener("click", removeItem);
+
 clearBtn.addEventListener("click", clearAllItems);
