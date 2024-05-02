@@ -66,8 +66,9 @@ function onAddItemSubmit(e) {
 
 function addItemtoStorage(item) {
   const itemsFromStorage = getItemsFromStorage();
+  const itemCap = item.charAt(0).toUpperCase() + item.slice(1);
   // Add new item to array
-  itemsFromStorage.push(item);
+  itemsFromStorage.push(itemCap);
 
   // Convert to JSON string and set to local storage
   localStorage.setItem("items", JSON.stringify(itemsFromStorage));
@@ -87,7 +88,8 @@ function getItemsFromStorage() {
 
 function addItemToDOM(item) {
   const li = document.createElement("li");
-  li.appendChild(document.createTextNode(item));
+  const itemCap = item.charAt(0).toUpperCase() + item.slice(1);
+  li.appendChild(document.createTextNode(itemCap));
 
   const button = createButton("remove-item btn-link text-red");
   li.appendChild(button);
@@ -106,7 +108,8 @@ function onClickItem(e) {
 
 function checkIfItemExists(item) {
   const itemsFromStorage = getItemsFromStorage();
-  return itemsFromStorage.includes(item);
+  const itemCap = item.charAt(0).toUpperCase() + item.slice(1);
+  return itemsFromStorage.includes(itemCap);
 }
 
 function setItemToEdit(item) {
@@ -198,3 +201,23 @@ function init() {
 }
 
 init();
+
+// Can I create an alphabetical list button?
+
+let list = getItemsFromStorage();
+let capArr = [];
+
+function listUpperCase() {
+  let capArr = [];
+
+  for (let i = 0; i < list.length; i++) {
+    let capitalFirstLetter = list[i].charAt(0).toUpperCase();
+    let capWord = capitalFirstLetter + list[i].slice(1);
+    capArr.push(capWord);
+  }
+  return capArr;
+}
+
+const capItems = listUpperCase();
+const alphaCapItems = capItems.sort();
+console.log(alphaCapItems);

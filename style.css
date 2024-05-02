@@ -128,3 +128,7 @@ header h1 {
     width: 100%;
   }
 }
+
+.fa-solid {
+  padding: 3px;
+}
