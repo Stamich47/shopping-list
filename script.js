@@ -6,6 +6,9 @@ const itemList = document.querySelector("#item-list");
 const clearBtn = document.querySelector("#clear");
 const itemFilter = document.querySelector("#filter");
 const formBtn = itemForm.querySelector("button");
+const corgiImg = document.querySelector("#still-corgi");
+const corgiAnimImg = document.querySelector("#animated-corgi");
+const corgiText = document.querySelector("#corgi-text");
 let isEditMode = false;
 
 // Functions
@@ -171,6 +174,20 @@ function filterItems(e) {
   });
 }
 
+function OnClickCorgi() {
+  corgiImg.style.display = "none";
+  corgiAnimImg.style.display = "flex";
+  corgiText.style.display = "none";
+}
+
+function onClickCorgi2() {
+  if ((corgiImg.style.display = "none")) {
+    corgiImg.style.display = "flex";
+    corgiAnimImg.style.display = "none";
+    corgiText.style.display = "block";
+  }
+}
+
 function checkUI() {
   itemInput.value = "";
 
@@ -179,9 +196,14 @@ function checkUI() {
   if (items.length === 0) {
     clearBtn.style.display = "none";
     itemFilter.style.display = "none";
+    corgiImg.style.display = "flex";
+    corgiAnimImg.style.display = "none";
   } else {
     clearBtn.style.display = "block";
     itemFilter.style.display = "block";
+    corgiImg.style.display = "none";
+    corgiAnimImg.style.display = "none";
+    corgiText.style.display = "none";
   }
 
   formBtn.innerHTML = "<i class=fa-solid fa-plus></i> Add Item";
@@ -195,29 +217,12 @@ function init() {
   itemList.addEventListener("click", onClickItem);
   clearBtn.addEventListener("click", clearAllItems);
   itemFilter.addEventListener("input", filterItems);
+  corgiImg.addEventListener("click", OnClickCorgi);
+  corgiAnimImg.addEventListener("click", onClickCorgi2);
   document.addEventListener("DOMContentLoaded", displayItems);
-
   checkUI();
 }
 
 init();
 
 // Can I create an alphabetical list button?
-
-let list = getItemsFromStorage();
-let capArr = [];
-
-function listUpperCase() {
-  let capArr = [];
-
-  for (let i = 0; i < list.length; i++) {
-    let capitalFirstLetter = list[i].charAt(0).toUpperCase();
-    let capWord = capitalFirstLetter + list[i].slice(1);
-    capArr.push(capWord);
-  }
-  return capArr;
-}
-
-const capItems = listUpperCase();
-const alphaCapItems = capItems.sort();
-console.log(alphaCapItems);
